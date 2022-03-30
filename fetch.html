@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <ul class="articles">
+
+        </ul>
+        <button onclick="_loadArticles()">Load Articles</button>
+    </div>
+
+    <style>
+
+    </style>
+    <script>
+        function _loadArticles() {
+            fetch('https://62416c6919f6098792468ef4.mockapi.io/api/v1/articles').then((resp) => {
+                return resp.json();
+            }).then((data) => {
+                const ulNode = document.querySelector('ul.articles');
+                for (let i = 0; i < data.length; i++) {
+                    const articles = data[i];
+                    const liNode = document.createElement('li');
+                    liNode.innerHTML = `<h2>${articles.title}</h2>
+                                        <p>${articles.content}</p> `;
+                    ulNode.appendChild(liNode);
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
